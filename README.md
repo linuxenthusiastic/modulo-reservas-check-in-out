@@ -24,7 +24,7 @@
 ### 1.1 Alcance del Módulo
 
 Este módulo implementa la funcionalidad completa de:
-- ✅ Gestión de Reservas (CRUD)
+- ✅ Gestión de Reservas
 - ✅ Sistema de Check-In/Check-Out con cálculo de tiempo
 - ✅ Pases Mensuales con 3 tipos (Básico, Premium, Empresarial)
 - ✅ Generación y validación de códigos QR con seguridad
