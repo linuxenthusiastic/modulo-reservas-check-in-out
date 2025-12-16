@@ -116,8 +116,6 @@ com.parking.system/
 
 ![Diagrama de Acceso y Reservas](./Modulo-Acceso.jpg)
 
-**Archivo editable:** [`acceso_reservas.drawio`](./acceso_reservas.drawio)
-
 **Muestra:**
 - Modelos: Reserva, CheckIn, CheckOut
 - Services y Controllers
@@ -131,8 +129,6 @@ com.parking.system/
 ### Diagrama 2: Módulo de Pases Mensuales
 
 ![Diagrama de Pases Mensuales](./Pases%20mensuales.jpg)
-
-**Archivo editable:** [`pase_mensual.drawio`](./pase_mensual.drawio)
 
 **Muestra:**
 - Modelo PaseMensual
