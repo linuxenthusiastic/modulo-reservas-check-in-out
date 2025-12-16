@@ -1,7 +1,7 @@
 # 📚 DOCUMENTACIÓN - MÓDULO RESERVAS, CHECK-IN/OUT Y PASES MENSUALES
 
-**Autor:** Compañero 3  
-**Fecha:** Diciembre 2024  
+**Autor:** Santiago Abuawad 
+**Fecha:** Diciembre 2025  
 **Tecnología:** Spring Boot 3.2.0 + Java 17
 
 ---
