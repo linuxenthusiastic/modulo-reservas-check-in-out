@@ -138,8 +138,6 @@ com.parking.system/
 - DTOs Request/Response
 - Mapper
 
-> 💡 **Para editar:** Abrir los archivos `.drawio` en [draw.io](https://app.diagrams.net/)
-
 ---
 
 ## 3. PATRONES DE DISEÑO <a id="patrones"></a>
