@@ -110,6 +110,31 @@ com.parking.system/
 
 ---
 
+
+## 🎨 Diagramas UML
+
+### Diagrama 1: Módulo de Acceso y Reservas
+**Archivo:** [`acceso_reservas.drawio`](./acceso_reservas.drawio)
+
+**Muestra:**
+- Modelos: Reserva, CheckIn, CheckOut
+- Services y Controllers
+- Sistema QR
+- Relaciones entre componentes
+
+### Diagrama 2: Módulo de Pases Mensuales
+**Archivo:** [`pase_mensual.drawio`](./pase_mensual.drawio)
+
+**Muestra:**
+- Modelo PaseMensual
+- Implementación del Strategy Pattern
+- Cálculo dinámico de precios
+- Tipos: Básico, Premium, Empresarial
+
+> 💡 **Para visualizar:** Abrir los archivos `.drawio` en [draw.io](https://app.diagrams.net/)
+
+---
+
 ## 3. PATRONES DE DISEÑO <a id="patrones"></a>
 
 ### 3.1 Strategy Pattern ⭐
