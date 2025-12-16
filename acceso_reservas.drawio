@@ -1,0 +1,433 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Claude" version="22.0.0" type="device">
+  <diagram name="Acceso y Reservas" id="acceso">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Título -->
+        <mxCell id="title" value="Diagrama de Clases - Módulo Acceso (Reservas, Check-In/Check-Out)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="450" y="20" width="700" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ============ MODELOS DE DOMINIO ============ -->
+        
+        <!-- Reserva -->
+        <mxCell id="reserva" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Reserva&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- id: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- usuarioId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- espacioId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- fechaInicio: LocalDateTime&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- fechaFin: LocalDateTime&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- estado: String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- qrCode: String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- fechaCreacion: LocalDateTime&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getId(): Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getters/setters&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="240" height="220" as="geometry" />
+        </mxCell>
+
+        <!-- CheckIn -->
+        <mxCell id="checkin" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CheckIn&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- id: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- reservaId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- horaEntrada: LocalDateTime&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- dispositivoId: String&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getId(): Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getters/setters&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="340" width="240" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- CheckOut -->
+        <mxCell id="checkout" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CheckOut&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- id: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- reservaId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- horaSalida: LocalDateTime&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- tiempoTotalMinutos: Long&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getId(): Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getters/setters&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="520" width="240" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- ============ SERVICES ============ -->
+        
+        <!-- ReservaService -->
+        <mxCell id="reserva-service" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ReservaService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- reservas: List&amp;lt;Reserva&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- qrCodeGenerator: QRCodeGenerator&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ crearReserva(): Reserva&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ obtenerTodas(): List&amp;lt;Reserva&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ obtenerActivas(): List&amp;lt;Reserva&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ verificarDisponibilidad(): boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ buscarPorCodigoQR(String): Optional&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ cancelarReserva(Long): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="80" width="280" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- CheckInService -->
+        <mxCell id="checkin-service" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CheckInService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- checkIns: List&amp;lt;CheckIn&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- reservaService: ReservaService&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ realizarCheckIn(): CheckIn&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ realizarCheckInConQR(): CheckIn&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ obtenerTodos(): List&amp;lt;CheckIn&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ buscarPorReserva(Long): Optional&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="320" width="280" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- CheckOutService -->
+        <mxCell id="checkout-service" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CheckOutService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- checkOuts: List&amp;lt;CheckOut&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- reservaService: ReservaService&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- checkInService: CheckInService&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ realizarCheckOut(): CheckOut&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ obtenerTodos(): List&amp;lt;CheckOut&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- calcularTiempo(): Long&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="540" width="280" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- ============ CONTROLLERS ============ -->
+        
+        <!-- ReservaController -->
+        <mxCell id="reserva-controller" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;RestController&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ReservaController&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- reservaService: ReservaService&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- mapper: ReservaMapper&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ crearReserva(): ResponseEntity&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ obtenerTodas(): ResponseEntity&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ obtenerActivas(): ResponseEntity&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ verificarDisponibilidad(): ResponseEntity&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ cancelarReserva(): ResponseEntity&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="80" width="300" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- AccesoController -->
+        <mxCell id="acceso-controller" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;RestController&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;AccesoController&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- checkInService: CheckInService&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- checkOutService: CheckOutService&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- checkInMapper: CheckInMapper&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- checkOutMapper: CheckOutMapper&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ hacerCheckIn(): ResponseEntity&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ hacerCheckOut(): ResponseEntity&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ validarQR(): ResponseEntity&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ obtenerCheckIns(): ResponseEntity&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="340" width="300" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- ============ UTILITIES ============ -->
+        
+        <!-- QRCodeGenerator -->
+        <mxCell id="qr-generator" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;QRCodeGenerator&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- SECRET_KEY: String&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ generarCodigo(Long, LocalDateTime): String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ esCodigoValido(String): boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ extraerReservaId(String): Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- generarHash(String): String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="780" width="280" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- ============ DTOs REQUEST ============ -->
+        
+        <!-- CrearReservaRequest -->
+        <mxCell id="crear-reserva-request" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CrearReservaRequest&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- usuarioId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- espacioId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- fechaInicio: LocalDateTime&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- fechaFin: LocalDateTime&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getters/setters&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="80" width="200" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- CheckInRequest -->
+        <mxCell id="checkin-request" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CheckInRequest&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- reservaId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- dispositivoId: String&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getters/setters&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="250" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- CheckOutRequest -->
+        <mxCell id="checkout-request" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CheckOutRequest&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- reservaId: Long&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getters/setters&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="380" width="200" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- ValidarQRRequest -->
+        <mxCell id="validar-qr-request" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ValidarQRRequest&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- codigoQR: String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- dispositivoId: String&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getters/setters&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="500" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ============ DTOs RESPONSE ============ -->
+        
+        <!-- ReservaResponse -->
+        <mxCell id="reserva-response" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ReservaResponse&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- id: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- usuarioId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- espacioId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- fechaInicio: LocalDateTime&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- estado: String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- qrCode: String&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getters/setters&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="80" width="200" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- CheckInResponse -->
+        <mxCell id="checkin-response" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CheckInResponse&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- id: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- reservaId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- horaEntrada: LocalDateTime&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- mensaje: String&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getters/setters&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="270" width="200" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- CheckOutResponse -->
+        <mxCell id="checkout-response" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CheckOutResponse&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- id: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- reservaId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- horaSalida: LocalDateTime&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- tiempoTotalMinutos: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- mensaje: String&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getters/setters&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="430" width="200" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- ValidarQRResponse -->
+        <mxCell id="validar-qr-response" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ValidarQRResponse&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- valido: boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- accion: String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- mensaje: String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- reservaId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- checkInId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- razon: String&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getters/setters&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="610" width="200" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- ============ MAPPERS ============ -->
+        
+        <!-- ReservaMapper -->
+        <mxCell id="reserva-mapper" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ReservaMapper&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ toResponse(Reserva): ReservaResponse&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="780" width="300" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- CheckInMapper -->
+        <mxCell id="checkin-mapper" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CheckInMapper&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ toResponse(CheckIn): CheckInResponse&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="900" width="300" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- CheckOutMapper -->
+        <mxCell id="checkout-mapper" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CheckOutMapper&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ toResponse(CheckOut): CheckOutResponse&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="1020" width="300" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ============ RELACIONES DE DOMINIO ============ -->
+        
+        <!-- Reserva -> CheckIn -->
+        <mxCell id="rel-reserva-checkin" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="reserva" target="checkin">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-reserva-checkin-label" value="1    tiene    0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-reserva-checkin">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint x="40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Reserva -> CheckOut -->
+        <mxCell id="rel-reserva-checkout" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="checkin" target="checkout">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-reserva-checkout-label" value="1    tiene    0..1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-reserva-checkout">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint x="-40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ============ RELACIONES DE SERVICES ============ -->
+        
+        <!-- ReservaService -> Reserva -->
+        <mxCell id="rel-service-reserva" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="reserva-service" target="reserva">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-service-reserva-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-service-reserva">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ReservaService -> QRGenerator -->
+        <mxCell id="rel-service-qr" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="reserva-service" target="qr-generator">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-service-qr-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-service-qr">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CheckInService -> CheckIn -->
+        <mxCell id="rel-checkin-service-model" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="checkin-service" target="checkin">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-checkin-service-model-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-checkin-service-model">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CheckInService -> ReservaService -->
+        <mxCell id="rel-checkin-service-reserva" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="checkin-service" target="reserva-service">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-checkin-service-reserva-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-checkin-service-reserva">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CheckOutService -> CheckOut -->
+        <mxCell id="rel-checkout-service-model" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="checkout-service" target="checkout">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-checkout-service-model-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-checkout-service-model">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CheckOutService -> ReservaService -->
+        <mxCell id="rel-checkout-service-reserva" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="checkout-service" target="reserva-service">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-checkout-service-reserva-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-checkout-service-reserva">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CheckOutService -> CheckInService -->
+        <mxCell id="rel-checkout-service-checkin" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="checkout-service" target="checkin-service">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-checkout-service-checkin-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-checkout-service-checkin">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ============ RELACIONES DE CONTROLLERS ============ -->
+        
+        <!-- ReservaController -> ReservaService -->
+        <mxCell id="rel-controller-service" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="reserva-controller" target="reserva-service">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-controller-service-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-controller-service">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ReservaController -> ReservaMapper -->
+        <mxCell id="rel-controller-mapper" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="reserva-controller" target="reserva-mapper">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-controller-mapper-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-controller-mapper">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- AccesoController -> CheckInService -->
+        <mxCell id="rel-acceso-checkin-service" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="acceso-controller" target="checkin-service">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-acceso-checkin-service-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-acceso-checkin-service">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- AccesoController -> CheckOutService -->
+        <mxCell id="rel-acceso-checkout-service" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="acceso-controller" target="checkout-service">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-acceso-checkout-service-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-acceso-checkout-service">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- AccesoController -> CheckInMapper -->
+        <mxCell id="rel-acceso-checkin-mapper" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="acceso-controller" target="checkin-mapper">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-acceso-checkin-mapper-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-acceso-checkin-mapper">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- AccesoController -> CheckOutMapper -->
+        <mxCell id="rel-acceso-checkout-mapper" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="acceso-controller" target="checkout-mapper">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-acceso-checkout-mapper-label" value="&amp;lt;&amp;lt;usa&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel-acceso-checkout-mapper">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Controller -> DTOs Request -->
+        <mxCell id="rel-reserva-controller-request" value="&amp;lt;&amp;lt;recibe&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="reserva-controller" target="crear-reserva-request">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-acceso-controller-checkin-request" value="&amp;lt;&amp;lt;recibe&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="acceso-controller" target="checkin-request">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-acceso-controller-checkout-request" value="&amp;lt;&amp;lt;recibe&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="acceso-controller" target="checkout-request">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-acceso-controller-validar-request" value="&amp;lt;&amp;lt;recibe&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=1;exitY=0.8;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="acceso-controller" target="validar-qr-request">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Controller -> DTOs Response -->
+        <mxCell id="rel-reserva-controller-response" value="&amp;lt;&amp;lt;retorna&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="reserva-controller" target="reserva-response">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-acceso-controller-checkin-response" value="&amp;lt;&amp;lt;retorna&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="acceso-controller" target="checkin-response">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-acceso-controller-checkout-response" value="&amp;lt;&amp;lt;retorna&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=1;exitY=0.6;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="acceso-controller" target="checkout-response">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-acceso-controller-validar-response" value="&amp;lt;&amp;lt;retorna&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=1;exitY=0.9;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="acceso-controller" target="validar-qr-response">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Mapper -> Model -->
+        <mxCell id="rel-reserva-mapper-model" value="&amp;lt;&amp;lt;convierte&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="reserva-mapper" target="reserva">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-checkin-mapper-model" value="&amp;lt;&amp;lt;convierte&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="checkin-mapper" target="checkin">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-checkout-mapper-model" value="&amp;lt;&amp;lt;convierte&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="checkout-mapper" target="checkout">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Mapper -> Response -->
+        <mxCell id="rel-reserva-mapper-response" value="&amp;lt;&amp;lt;convierte&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="reserva-mapper" target="reserva-response">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-checkin-mapper-response" value="&amp;lt;&amp;lt;convierte&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="checkin-mapper" target="checkin-response">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-checkout-mapper-response" value="&amp;lt;&amp;lt;convierte&amp;gt;&amp;gt;" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="checkout-mapper" target="checkout-response">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="690" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
